@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FilmTrack | Iniciar Sesión</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="login-body">
+  <div class="login-container">
+    <a href="index.html" target="_blank" class="logo">🎬 Film<span>Track</span></a>
+    <h2>Iniciar Sesión</h2>
+
+    <form id="loginForm" action="#" method="POST">
+      <div class="input-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="********" required />
+      </div>
+
+      <button type="submit" class="btn">Ingresar</button>
+    </form>
+
+    <p class="register-text">
+      ¿No tenés cuenta?
+      <a href="index.html?registro=true" target="_blank" id="irRegistro" class="btn-primary">Registrate</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      console.log("Intentando iniciar sesión con:", email, password);
+      alert("Inicio de sesión simulado ✨");
+    });
+  </script>
+</body>
+</html>
