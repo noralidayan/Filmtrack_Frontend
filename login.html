@@ -6,10 +6,9 @@
   <title>FilmTrack | Iniciar Sesión</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body class="login-body">
   <div class="login-container">
-    <a href="index.html" target="_blank" class="logo">🎬 Film<span>Track</span></a>
+    <h1 class="logo">🎬 Film<span>Track</span></h1>
     <h2>Iniciar Sesión</h2>
 
     <form id="loginForm" action="#" method="POST">
@@ -28,18 +27,14 @@
 
     <p class="register-text">
       ¿No tenés cuenta?
-      <a href="index.html?registro=true" target="_blank" id="irRegistro" class="btn-primary">Registrate</a>
-    </p>
-  </div>
+      <a href="#" id="irRegistro" class="btn-primary">Registrate</a>
+<script>
+  document.getElementById('irRegistro').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Abrir index.html en la misma ventana
+    window.location.href = 'index.html';
+    // Podés pasar info por query string si querés que JS de index sepa que debe abrir el registro
+    // Ej: window.location.href = 'index.html?abrirRegistro=true';
+  });
+</script>
 
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      console.log("Intentando iniciar sesión con:", email, password);
-      alert("Inicio de sesión simulado ✨");
-    });
-  </script>
-</body>
-</html>
