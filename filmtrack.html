@@ -172,61 +172,85 @@
   </footer>
 
   <script>
-    const comenzarBtn = document.getElementById('comenzarBtn');
-    const registroContainer = document.getElementById('registroContainer');
-    const form = document.getElementById('registroForm');
-    const emailError = document.getElementById('emailError');
-    const claveError = document.getElementById('claveError');
-    const fechaError = document.getElementById('fechaError');
+  const comenzarBtn = document.getElementById('comenzarBtn');
+  const registroContainer = document.getElementById('registroContainer');
+  const form = document.getElementById('registroForm');
+  const emailError = document.getElementById('emailError');
+  const claveError = document.getElementById('claveError');
+  const fechaError = document.getElementById('fechaError');
 
-    // Mostrar formulario de registro
-    comenzarBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      registroContainer.style.display = 'block';
-      comenzarBtn.style.display = 'none';
+  // Mostrar formulario de registro
+  comenzarBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    registroContainer.style.display = 'block';
+    comenzarBtn.style.display = 'none';
+  });
+
+  // Validaciones + conexión al backend
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valido = true;
+
+    const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
+    if (!emailRegex.test(form.email.value)) {
+      emailError.textContent = "Formato de email inválido";
+      valido = false;
+    } else {
+      emailError.textContent = "";
+    }
+
+    if (form.clave.value.length < 5 || form.clave.value.includes(" ")) {
+      claveError.textContent = "Contraseña inválida (mín 5 caracteres, sin espacios)";
+      valido = false;
+    } else {
+      claveError.textContent = "";
+    }
+
+    const fechaRegex = /^\d{2}-\d{2}-\d{4}$/;
+    if (!fechaRegex.test(form.fechaNacimiento.value)) {
+      fechaError.textContent = "Formato de fecha inválido (dd-mm-aaaa)";
+      valido = false;
+    } else {
+      fechaError.textContent = "";
+    }
+
+    ["nombre","usuario","email","clave","fechaNacimiento"].forEach(id => {
+      if (form[id].value.trim() === "") {
+        alert("Todos los campos son obligatorios");
+        valido = false;
+      }
     });
 
-    // Validaciones
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let valido = true;
+    if (!valido) return;
 
-      const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
-      if (!emailRegex.test(form.email.value)) {
-        emailError.textContent = "Formato de email inválido";
-        valido = false;
-      } else {
-        emailError.textContent = "";
-      }
+    // 🔹 Si todo está OK, enviar al backend
+    const usuario = {
+      nombre: form.nombre.value,
+      nombreUsuario: form.usuario.value,
+      email: form.email.value,
+      clave: form.clave.value,
+      fechaNacimiento: form.fechaNacimiento.value.split("-").reverse().join("-")
+    };
 
-      if (form.clave.value.length < 5 || form.clave.value.includes(" ")) {
-        claveError.textContent = "Contraseña inválida (mín 5 caracteres, sin espacios)";
-        valido = false;
-      } else {
-        claveError.textContent = "";
-      }
-
-      const fechaRegex = /^\d{2}-\d{2}-\d{4}$/;
-      if (!fechaRegex.test(form.fechaNacimiento.value)) {
-        fechaError.textContent = "Formato de fecha inválido (dd-mm-aaaa)";
-        valido = false;
-      } else {
-        fechaError.textContent = "";
-      }
-
-      ["nombre","usuario","email","clave","fechaNacimiento"].forEach(id => {
-        if (form[id].value.trim() === "") {
-          alert("Todos los campos son obligatorios");
-          valido = false;
-        }
+    try {
+      const response = await fetch("http://localhost:8080/usuarios/registrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuario)
       });
 
-      if (valido) {
-        alert("Formulario válido! Listo para enviar al backend Java.");
-        // Aquí conectás con tu backend usando fetch/AJAX
+      if (response.ok) {
+        alert("✅ Usuario registrado con éxito!");
+        form.reset();
+      } else {
+        alert("❌ Error al registrar el usuario.");
       }
-    });
-    
-  </script>
+    } catch (error) {
+      console.error(error);
+      alert("⚠️ No se pudo conectar con el servidor.");
+    }
+  });
+</script>
+
 </body>
 </html>

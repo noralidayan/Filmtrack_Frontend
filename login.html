@@ -11,7 +11,7 @@
     <h1 class="logo">🎬 Film<span>Track</span></h1>
     <h2>Iniciar Sesión</h2>
 
-    <form id="loginForm" action="#" method="POST">
+    <form id="loginForm">
       <div class="input-group">
         <label for="email">Correo electrónico</label>
         <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required />
@@ -24,6 +24,41 @@
 
       <button type="submit" class="btn">Ingresar</button>
     </form>
+
     <p class="register-text">
       ¿No tenés cuenta?
       <a href="index.html?registro=true" class="btn-primary">Registrate</a>
+    </p>
+  </div>
+
+  <!-- 🔹 Script de conexión al backend -->
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const datos = {
+        email: document.getElementById("email").value,
+        clave: document.getElementById("password").value
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/usuarios/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos)
+        });
+
+        if (response.ok) {
+          const usuario = await response.json();
+          alert("✨ Sesión iniciada correctamente. ¡Bienvenida " + usuario.nombreUsuario + "!");
+        } else {
+          alert("❌ Credenciales incorrectas o usuario no encontrado.");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("⚠️ Error al conectar con el servidor.");
+      }
+    });
+  </script>
+</body>
+</html>
