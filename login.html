@@ -24,17 +24,6 @@
 
       <button type="submit" class="btn">Ingresar</button>
     </form>
-
     <p class="register-text">
       ¿No tenés cuenta?
-      <a href="#" id="irRegistro" class="btn-primary">Registrate</a>
-<script>
-  document.getElementById('irRegistro').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Abrir index.html en la misma ventana
-    window.location.href = 'index.html';
-    // Podés pasar info por query string si querés que JS de index sepa que debe abrir el registro
-    // Ej: window.location.href = 'index.html?abrirRegistro=true';
-  });
-</script>
-
+      <a href="index.html?registro=true" class="btn-primary">Registrate</a>

@@ -108,3 +108,138 @@ footer {
   color: #b892ff;
   background: #0d0014;
 }
+/* ---- Botón Ingresar ---- */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #ff69b4;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  width: auto; /* 👈 Esto evita que se estire */
+  min-width: 140px; /* 👈 Tamaño visual equilibrado */
+  text-align: center;
+}
+
+.btn:hover {
+  background: #ff1493;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+  transform: scale(1.03);
+}
+/* ---- Centrar toda la pantalla ---- */
+body.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at left top, #2a003d, #000);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+/* ---- Contenedor del login ---- */
+.login-container {
+  background: #2b2b2b;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 192, 203, 0.5);
+  text-align: center;
+  width: 350px;
+}
+
+/* ---- Logo y títulos ---- */
+.login-container .logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff69b4;
+  margin-bottom: 10px;
+}
+
+.login-container h2 {
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+/* ---- Inputs ---- */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffb6c1;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #3c3c3c;
+  color: #fff;
+  outline: none;
+}
+
+/* ---- Botón ---- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #ff69b4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background: #ff1493;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+  transform: scale(1.03);
+}
+
+/* ---- Texto de registro ---- */
+.register-text {
+  margin-top: 20px;
+  color: #ccc;
+}
+
+.register-text a {
+  color: #ff69b4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-text a:hover {
+  color: #ff1493;
+  text-decoration: underline;
+}
+.register-text {
+  margin-top: 25px; /* separa del botón Ingresar */
+  color: #ccc;
+  font-size: 14px;
+}
+
+.register-text a {
+  color: #f0e9ec;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 6px; /* 🔹 separa el link del texto "¿No tenés cuenta?" */
+}
+
+.register-text a:hover {
+  color: #ff1493;
+  text-decoration: underline;
+}
