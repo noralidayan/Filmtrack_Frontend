@@ -31,7 +31,6 @@
     </p>
   </div>
 
-  <!-- 🔹 Script de conexión al backend -->
   <script>
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -50,7 +49,12 @@
 
         if (response.ok) {
           const usuario = await response.json();
-          alert("✨ Sesión iniciada correctamente. ¡Bienvenida " + usuario.nombreUsuario + "!");
+
+          // ✅ Guardar sesión en localStorage
+          localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
+
+          // ✅ Redirigir al panel de usuario
+          window.location.href = "usuario.html";
         } else {
           alert("❌ Credenciales incorrectas o usuario no encontrado.");
         }

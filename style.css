@@ -13,6 +13,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto; /* ✅ permite desplazarse si algo queda tapado */
 }
 
 /* NAVBAR */
@@ -73,6 +75,7 @@ body {
   padding-top: 6rem;
   background: url('https://images.unsplash.com/photo-1609770230689-91a91d1f92b0?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
   position: relative;
+  overflow-y: auto; /* ✅ permite scroll cuando se muestra el registro */
 }
 
 .hero::after {
@@ -107,7 +110,11 @@ footer {
   font-size: 0.9rem;
   color: #b892ff;
   background: #0d0014;
+  position: relative; /* ✅ antes fixed, ahora no tapa los inputs */
+  bottom: 0;
+  width: 100%;
 }
+
 /* ---- Botón Ingresar ---- */
 .btn {
   display: inline-block;
@@ -122,8 +129,8 @@ footer {
   transition: 0.3s;
   margin-top: 15px;
   margin-bottom: 25px;
-  width: auto; /* 👈 Esto evita que se estire */
-  min-width: 140px; /* 👈 Tamaño visual equilibrado */
+  width: auto;
+  min-width: 140px;
   text-align: center;
 }
 
@@ -132,6 +139,7 @@ footer {
   box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
   transform: scale(1.03);
 }
+
 /* ---- Centrar toda la pantalla ---- */
 body.login-body {
   display: flex;
@@ -142,6 +150,7 @@ body.login-body {
   font-family: 'Poppins', sans-serif;
   color: #fff;
   margin: 0;
+  overflow-y: auto; /* ✅ para evitar que algo quede fuera de vista */
 }
 
 /* ---- Contenedor del login ---- */
@@ -152,6 +161,8 @@ body.login-body {
   box-shadow: 0 0 25px rgba(255, 192, 203, 0.5);
   text-align: center;
   width: 350px;
+  max-height: 90vh; /* ✅ evita que se corte si hay teclado */
+  overflow-y: auto; /* ✅ hace scroll si se tapa algo */
 }
 
 /* ---- Logo y títulos ---- */
@@ -212,22 +223,7 @@ body.login-body {
 
 /* ---- Texto de registro ---- */
 .register-text {
-  margin-top: 20px;
-  color: #ccc;
-}
-
-.register-text a {
-  color: #ff69b4;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.register-text a:hover {
-  color: #ff1493;
-  text-decoration: underline;
-}
-.register-text {
-  margin-top: 25px; /* separa del botón Ingresar */
+  margin-top: 25px;
   color: #ccc;
   font-size: 14px;
 }
@@ -236,10 +232,100 @@ body.login-body {
   color: #f0e9ec;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 6px; /* 🔹 separa el link del texto "¿No tenés cuenta?" */
+  margin-left: 6px;
 }
 
 .register-text a:hover {
   color: #ff1493;
   text-decoration: underline;
+}
+/* 📱 Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar .logo {
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar a {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    margin: 3px 0;
+  }
+
+  .hero {
+    flex-direction: column;
+    padding: 5rem 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero .btn-primary {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  .login-container {
+    width: 90%;
+    padding: 25px;
+    max-height: 80vh; /* ✅ Evita que se tape con el teclado */
+  }
+
+  .login-container input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+}
+
+/* 📱 Ultra pequeñas (teléfonos <480px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .btn,
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .login-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .login-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .login-container .logo {
+    font-size: 22px;
+  }
 }
